@@ -40,8 +40,10 @@
 	 * @param  {String} language
 	 */
 	Greeter.init = function(fullname, language) {
-		this.fullname = fullname || '';
-		this.language = language || 'en';
+		if (this.validate(language)) {
+			this.fullname = fullname || '';
+			this.language = language || 'en';
+		}
 	}
 
 	Greeter.init.prototype = {
@@ -50,8 +52,8 @@
 		 * Validates if the user has put a valid language
 		 * @return {Boolean or Error}
 		 */
-		validate : function() {
-			if (languages.indexOf(this.language) === -1) {
+		validate : function(language) {
+			if (languages.indexOf(language || this.language) === -1) {
 				throw "Invalid Language";
 			} else {
 				return true;
